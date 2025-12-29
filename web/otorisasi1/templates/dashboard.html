@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block title %}Dashboard - InfoVault{% endblock %}
+
+{% block content %}
+<div class="main-content">
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <div>
+                <h1>Welcome, {{ user.username }}! 👋</h1>
+                <p>Manage your secure information</p>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div>
+                    <div class="stat-value">{{ infos|length }}</div>
+                    <div class="stat-label">Total Items</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-header">
+            <h2>Your Information</h2>
+            <a href="{{ url_for('new_info') }}" class="btn btn-primary">+ New Info</a>
+        </div>
+
+        <div class="info-grid">
+            {% if infos %}
+            {% for info in infos %}
+            <a href="{{ url_for('info_detail', id=info.id) }}" class="info-card">
+                <div class="info-card-header">
+                    <span class="info-icon">📄</span>
+                    <span class="info-id">#{{ info.id }}</span>
+                </div>
+                <h3>{{ info.title }}</h3>
+                <p>{{ info.details[:100] }}{% if info.details|length > 100 %}...{% endif %}</p>
+                <div class="info-footer">
+                    <span class="info-date">{{ info.created_at.strftime('%Y-%m-%d') }}</span>
+                </div>
+            </a>
+            {% endfor %}
+            {% else %}
+            <div class="empty-state">
+                <div class="empty-icon">📭</div>
+                <h3>No Information Yet</h3>
+                <p>Create your first information item to get started</p>
+                <a href="{{ url_for('new_info') }}" class="btn btn-primary">Create First Info</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}New Info - InfoVault{% endblock %}
+
+{% block content %}
+<div class="main-content">
+    <div class="form-container">
+        <div class="form-card">
+            <div class="form-header">
+                <div class="form-icon">📝</div>
+                <h1>Create New Information</h1>
+                <p>Add a new item to your secure vault</p>
+            </div>
+
+            {% if error %}
+            <div class="alert alert-error">{{ error }}</div>
+            {% endif %}
+
+            <form method="POST" action="{{ url_for('new_info') }}" class="info-form">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" required autofocus
+                        placeholder="Enter a descriptive title">
+                </div>
+
+                <div class="form-group">
+                    <label for="details">Details</label>
+                    <textarea id="details" name="details" rows="10" required
+                        placeholder="Enter detailed information"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Create Info</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

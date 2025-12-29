@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ info.title }} - InfoVault{% endblock %}
+
+{% block content %}
+<div class="main-content">
+    <div class="info-detail-container">
+        <div class="breadcrumb">
+            <a href="{{ url_for('dashboard') }}">← Back to Dashboard</a>
+        </div>
+
+        <div class="info-detail-card">
+            <div class="info-detail-header">
+                <span class="info-badge">#{{ info.id }}</span>
+                <h1>{{ info.title }}</h1>
+                <div class="info-meta">
+                    <div class="meta-item">
+                        <span class="meta-icon">👤</span>
+                        <span>Owner: {{ owner.username }}</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">📅</span>
+                        <span>Created: {{ info.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🔄</span>
+                        <span>Updated: {{ info.updated_at.strftime('%Y-%m-%d %H:%M:%S') }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-detail-content">
+                <h3>Details</h3>
+                <div class="info-details-box">{{ info.details }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

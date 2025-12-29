@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}InfoVault{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    {% if current_user %}
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-icon">🔐</span>
+                InfoVault
+            </div>
+            <div class="nav-menu">
+                <a href="{{ url_for('dashboard') }}" class="nav-link">Dashboard</a>
+                <a href="{{ url_for('new_info') }}" class="nav-link">New Info</a>
+                <span class="nav-user">{{ current_user.username }}</span>
+                <a href="{{ url_for('logout') }}" class="nav-link logout">Logout</a>
+            </div>
+        </div>
+    </nav>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+
+    <div class="footer">
+        <p>&copy; 2024 InfoVault - Professional Information Management</p>
+    </div>
+</body>
+
+</html>
