@@ -48,11 +48,27 @@ init_db()
 
 @app.route('/')
 def index():
-    """Main page - login or dashboard"""
-    # Check for login attempt via GET parameters
-    if request.args.get('username') and request.args.get('password'):
-        username = request.args.get('username')
-        password = request.args.get('password')
+    """Main page - dashboard or redirect to login"""
+    # Check if user is already logged in
+    if session.get('user'):
+        conn = get_db()
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM users WHERE username = ? COLLATE NOCASE', (session['user'],))
+        user = cursor.fetchone()
+        conn.close()
+        
+        if user:
+            return render_template('index.html', user=dict(user), flag=FLAG)
+    
+    # Show login page
+    return render_template('login.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    """Handle login authentication"""
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
         
         # Hash password with seed
         hashed_password = hashlib.md5(f"{SEED}{password}{SEED}".encode()).hexdigest()
@@ -68,20 +84,11 @@ def index():
         if user:
             # Store the username from database (enables session hijacking!)
             session['user'] = user['username']
-            return render_template('index.html', user=dict(user), flag=FLAG)
+            return redirect(url_for('index'))
+        else:
+            return render_template('login.html', error='Invalid username or password')
     
-    # Check if user is already logged in
-    if session.get('user'):
-        conn = get_db()
-        cursor = conn.cursor()
-        cursor.execute('SELECT * FROM users WHERE username = ? COLLATE NOCASE', (session['user'],))
-        user = cursor.fetchone()
-        conn.close()
-        
-        if user:
-            return render_template('index.html', user=dict(user), flag=FLAG)
-    
-    # Show login page
+    # GET request - show login page
     return render_template('login.html')
 
 @app.route('/signup', methods=['GET', 'POST'])

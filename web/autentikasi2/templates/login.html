@@ -4,7 +4,13 @@
 <div class="card">
     <h1>Welcome Back</h1>
 
-    <form method="GET" action="/">
+    {% if error %}
+    <div style="color: #ef4444; background: #fee; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+        {{ error }}
+    </div>
+    {% endif %}
+
+    <form method="POST" action="/login">
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" id="username" name="username" required autocomplete="username">
