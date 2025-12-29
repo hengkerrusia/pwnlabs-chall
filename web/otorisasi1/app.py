@@ -117,8 +117,6 @@ def info_detail(id):
     current_user = get_current_user()
     db_session = get_db_session()
     
-    # VULNERABILITY: No authorization check!
-    # Should check: info.user_id == current_user.id
     info = db_session.query(Info).filter_by(id=id).first()
     
     if info:
