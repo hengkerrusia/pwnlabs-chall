@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="card">
+    <h1>Create Account</h1>
+
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST" action="/signup">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required autocomplete="username">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required autocomplete="new-password">
+        </div>
+
+        <button type="submit" class="btn">Sign Up</button>
+    </form>
+
+    <a href="/" class="link">Already have an account? Sign in</a>
+</div>
+{% endblock %}

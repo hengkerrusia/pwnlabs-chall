@@ -1,0 +1,11 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8002:5000"
+    environment:
+      - SECRET_SEED=${SECRET_SEED:-s3cr3t_s33d_2024}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-sup3r_s3cr3t_adm1n}
+      - FLAG=${FLAG:-PwnLabs{c4s3_1ns3ns1t1v3_c0ll4t10n_byp4ss}}
+      - SESSION_SECRET=${SESSION_SECRET:-}
+

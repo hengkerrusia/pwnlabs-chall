@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="card card-wide">
+    <h1>Dashboard</h1>
+
+    <div class="info-box">
+        <h3>Welcome, {{ user.username }}!</h3>
+        <p>You have successfully authenticated to the SecureAuth Portal.</p>
+    </div>
+
+    <div class="user-info">
+        <div class="user-info-item">
+            <div class="user-info-label">Username</div>
+            <div class="user-info-value">{{ user.username }}</div>
+        </div>
+        <div class="user-info-item">
+            <div class="user-info-label">User ID</div>
+            <div class="user-info-value">#{{ user.id }}</div>
+        </div>
+        <div class="user-info-item">
+            <div class="user-info-label">Account Created</div>
+            <div class="user-info-value">{{ user.created_at[:10] }}</div>
+        </div>
+    </div>
+
+    {% if user.username.lower() == 'admin' %}
+    <div class="flag-box">
+        <h3>🎯 Administrator Access Granted</h3>
+        <div class="flag-value">{{ flag }}</div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
