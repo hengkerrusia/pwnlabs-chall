@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Developer Accounts - TechCorp{% endblock %}
+
+{% block content %}
+<div class="info-box">
+    <p><strong>Developer Portal:</strong> Manage API keys and developer accounts</p>
+    <p style="margin-top: 8px;">View developer information and access credentials for internal services.</p>
+</div>
+
+<h2 style="margin-bottom: 20px;">Registered Developers</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.email }}</td>
+            <td><a href="/users/{{ user.id }}">View Details</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

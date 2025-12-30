@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Developer Details - TechCorp{% endblock %}
+
+{% block content %}
+<h2 style="margin-bottom: 30px;">Developer Account Information</h2>
+
+<div class="user-detail">
+    <p><strong>Email:</strong> {{ user.email }}</p>
+</div>
+
+<div class="user-detail">
+    <p><strong>API Key:</strong> <span class="hidden-key">********************</span></p>
+</div>
+
+<div class="user-detail">
+    <p><strong>Account Created:</strong> {{ user.created_at }}</p>
+</div>
+
+<div class="user-detail">
+    <p><strong>Last Updated:</strong> {{ user.updated_at }}</p>
+</div>
+
+<a href="/" class="back-link">← Back to Developer List</a>
+{% endblock %}
