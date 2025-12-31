@@ -1,0 +1,13 @@
+services:
+  web:
+    build: .
+    container_name: comex1-challenge
+    ports:
+      - "8007:80"
+    restart: unless-stopped
+    networks:
+      - comex1-network
+
+networks:
+  comex1-network:
+    driver: bridge
