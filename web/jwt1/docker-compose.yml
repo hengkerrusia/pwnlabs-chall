@@ -1,0 +1,14 @@
+services:
+  jwt1-challenge:
+    build: .
+    container_name: jwt1-challenge
+    ports:
+      - "3001:3000"
+    volumes:
+      - jwt1-data:/app
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+
+volumes:
+  jwt1-data:
